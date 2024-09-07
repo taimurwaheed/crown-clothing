@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../context/user-context";
+import React, { useState } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -18,21 +17,18 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
-  const [formFields, setformFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  const { setCurrentUser } = useContext(UserContext);
-
   const resetFormFields = () => {
-    setformFields(defaultFormFields);
+    setFormFields(defaultFormFields);
   };
-  console.log(formFields);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("passwords do not match");
       return;
     }
 
@@ -42,27 +38,26 @@ const SignUpForm = () => {
         password
       );
 
-      setCurrentUser(user);
-
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Email already in Use");
+        alert("Cannot create user, email already in use");
       } else {
-        console.log(error);
+        console.log("user creation encountered an error", error);
       }
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setformFields({ ...formFields, [name]: value });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
   };
 
   return (
     <div className="sign-up-container">
-      <h2>Dont' have an account?</h2>
+      <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -100,10 +95,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-
-        <Button buttonType="inverted" type="submit">
-          Sign Up
-        </Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
