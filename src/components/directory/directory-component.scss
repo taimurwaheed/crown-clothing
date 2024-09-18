@@ -3,4 +3,28 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 10px;
 }
+
+@media (max-width: 768px) {
+    .directory-container {
+      justify-content: center; 
+    }
+  
+    .directory-container > * {
+      flex: 1 1 45%; 
+      margin-bottom: 20px; 
+    }
+  }
+
+  @media (max-width: 480px) {
+    .directory-container {
+      flex-direction: column; 
+      align-items: center; 
+    }
+  
+    .directory-container > * {
+      width: 100%; 
+      margin-bottom: 15px; 
+    }
+  }

@@ -19,3 +19,32 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  body {
+    padding: 15px 20px; /* Adjust padding for smaller screens */
+  }
+
+  a {
+    font-size: 14px; /* Adjust font size for links */
+  }
+
+  code {
+    font-size: 14px; /* Adjust code font size */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px 15px; /* Further reduce padding for very small screens */
+  }
+
+  a {
+    font-size: 12px; /* Reduce link font size for mobile */
+  }
+
+  code {
+    font-size: 12px; /* Reduce code font size */
+  }
+}
